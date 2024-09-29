@@ -1,14 +1,148 @@
-/* Опишите в этом файле все keyframes для проекта и стили анимаций иконки Like.
+.theme-menu__button:disabled::before {
+    content: "▶";
+    position: absolute;
+    animation: arrow 0.5s ease-in-out infinite alternate;
+    top: 0;
+    left: 0;
+}
 
-Будьте внимательны! Для корректной работы скриптов на этом сайте нужно, чтобы в HTML некоторые классы были названы особым образом:
-✦ theme-dark — класс тёмной темы
-✦ theme-light — класс светлой темы
-✦ like-icon — для svg-иконки анимированного сердца
-✦ card__like-button — для кнопки Like рядом с иконкой
-✦ card__icon-button — для кнопки, оборачивающей иконку
-✦ card__icon-button — для кнопки, оборачивающей иконку
-✦ is-liked — для обозначения состояния лайкнутой иконки в виде сердца
-✦ button__text — для обозначения текстового элемента внутри кнопки
+.theme-menu__button:focus-visible,
+.theme-menu__button:hover,
+.theme-menu__button:disabled {
+    transition: opacity 0.3s ease;
+    opacity: 0.6;
+    position: relative;
+}
 
-Кроме этого, не меняйте HTML переключателя тем. Его разметка также гарантирует работу своего скрипта.
-*/
+.theme-menu__button:disabled {
+    pointer-events: none;
+}
+
+.theme-menu__button::after {
+    content: "";
+    display: block;
+    background-color: var(--color);
+    width: 0;
+    height: 2px;
+    transition: width 0.3s;
+}
+
+.theme-menu__button:focus-visible::after {
+    width: 100%;
+}
+
+.like-icon {
+    fill: var(--background-color);
+}
+
+.like-icon .heart {
+    transition: fill 0.3s ease;
+    transform-origin: center center;
+}
+
+/* основа сердца */
+.like-icon .main-body {
+    fill: var(--background-color);
+    transition: fill 0.3s 0.03s;
+}
+
+/* ховер изменение цвета середины серпдца */
+.card__icon-button:hover .main-body {
+    fill: var(--color);
+    transition: fill 0.5s 0.03s;
+}
+
+/* актианое состояние заполнение сердца */
+.card__icon-button:active .main-body {
+    fill: var(--heart);
+    transition: fill 0.3s 0.03s;
+}
+
+/* лайкнутое сердце закрашено в цвет */
+.like-icon.is-liked .main-body {
+    fill: var(--heart);
+    transition: fill 0.3s 0.03s;
+}
+
+/* плюс внутри свг */
+.like-icon .core {
+    fill: var(--background-color);
+    transition: fill 0.3s 0.05s;
+}
+
+/* ховер цвет креста */
+.card__icon-button:hover .core {
+    fill: var(--color);
+    transition: fill 0.3s 0.03s;
+}
+
+/* активное состояние крест */
+.card__icon-button:active .core {
+    fill: var(--heart);
+    transition: fill 0.3s;
+}
+
+/* лайкнутое состояние */
+.like-icon.is-liked .core {
+    fill: var(--heart);
+    transition: fill 0.3s;
+}
+
+/* контур сердца */
+.like-icon .contour {
+    fill: var(--color);
+}
+
+/* лайкнутый контур */
+.like-icon.is-liked .contour {
+    fill: var(--heart);
+    transition: fill 0.3s 5ms;
+}
+
+/* спарки вокруг сердца */
+.like-icon .sparks {
+    opacity: 0;
+    fill: var(--heart);
+}
+
+/* спарки при лайке */
+.like-icon.is-liked .sparks {
+    animation: sparks 0.3s ease;
+    animation-delay: 0.3s;
+}
+
+/* анимация скейл при лайке */
+.like-icon.is-liked .heart {
+    animation: scale-heart 0.3s ease-in 0.1s both;
+}
+
+/* кеи */
+@keyframes sparks {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes arrow {
+    0% {
+        left: 8px;
+    }
+    100% {
+        left: 4px;
+    }
+}
+
+@keyframes scale-heart {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
