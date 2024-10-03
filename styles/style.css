@@ -33,6 +33,7 @@
     background-size: cover;
     max-inline-size: 700px;
     margin: 0 auto;
+    color: var(--color);
 }
 
 .main__content {
@@ -279,8 +280,8 @@
 }
 
 .dialog .floppy {
-    width: 39px;
-    height: 39px;
+    block-size: 39px;
+    inline-size: 39px;
     mix-blend-mode: normal;
 }
 
