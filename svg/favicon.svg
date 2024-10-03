@@ -7,14 +7,13 @@
         d="M0 0V256H256V0H0ZM224 224H160V192H192V160H224V224ZM160 160H192V128H224V32H32V160H64V192H32V224H128V192H160V160Z" />
     <style>
         path {
-            fill: black;
+            fill: #000;
         }
 
         @media (prefers-color-scheme: dark) {
             path {
                 fill: #00cc14;
             }
-
         }
     </style>
 </svg>

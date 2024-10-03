@@ -1,19 +1,6 @@
-/* Здесь вы напишете основную часть стилей страницы.
-
-Будьте внимательны! Для корректной работы скриптов на этом сайте нужно, чтобы в HTML некоторые классы были названы особым образом:
-✦ theme-dark — класс тёмной темы
-✦ theme-light — класс светлой темы
-✦ like-icon — для svg-иконки анимированного сердца
-✦ card__like-button — для кнопки Like рядом с иконкой
-✦ card__icon-button — для кнопки, оборачивающей иконку
-✦ card__icon-button — для кнопки, оборачивающей иконку
-✦ is-liked — для обозначения состояния лайкнутой иконки в виде сердца
-✦ button__text — для обозначения текстового элемента внутри кнопки
-
-Кроме этого, не меняйте HTML переключателя тем. Его разметка также гарантирует работу своего скрипта.
-
-*/
-
+/* Здравствуйте, если будут какие-то визуальные расхождения с макетом,
+можете пожалуйста присылать вместе с замечаниями скриншоты с указанием? 
+Мне так будет проще понять,что нужно исправить. Спасибо. */
 @supports (-webkit-text-stroke: 1px var(--stroke)) or
     (text-stroke: 1px var(--stroke)) {
     .image-label {
@@ -98,7 +85,11 @@
 .card__like-button:focus-visible,
 .card__like-button:focus,
 .button-remember:focus-visible,
-.button-remember:focus {
+.button-remember:focus,
+.save-button:focus,
+.save-button:focus-visible,
+.card__icon-button:focus,
+.card__icon-button:focus-visible {
     outline: none;
 }
 
@@ -122,6 +113,37 @@
 
 .image {
     display: block;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.image-saturation {
+    filter: var(--saturation-color);
+}
+
+.image-expos {
+    filter: var(--expos-color);
+}
+
+.image-matrix {
+    filter: var(--matrix-color);
+}
+
+.image-rain {
+    filter: var(--rain-color);
+}
+
+.image-lover {
+    filter: var(--lover-color);
+    rotate: 180deg;
+}
+
+.image-yaaas {
+    filter: var(--yaaas-color);
+}
+
+.image-last {
+    filter: var(--last-color);
 }
 
 .card-content {
@@ -135,11 +157,15 @@
     position: absolute;
     top: 25px;
     right: 25px;
-    font-family: var(--font-accent);
+    font-family: var(--font-accent), sans-serif;
     font-size: 14px;
     opacity: 0.5;
     color: var(--color);
     mix-blend-mode: hard-light;
+    text-transform: lowercase;
+}
+
+.label-upper {
     text-transform: uppercase;
 }
 
@@ -157,15 +183,23 @@
 }
 
 .card__icon-button {
-    border: none;
+    border: 2px solid transparent;
     background-color: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    padding: 0;
+    max-block-size: 38px;
+    margin-inline-end: 4px;
 }
 
-.card__like-button {
+.card__icon-button:focus-visible {
+    border: 2px solid var(--border-color);
+}
+
+.card__like-button,
+.button {
     position: relative;
     justify-content: center;
     align-items: center;
@@ -174,9 +208,12 @@
     block-size: 38px;
     inline-size: 130px;
     background-color: var(--background-color);
+    box-shadow: none;
+    transition: 0.3s ease;
 }
 
-.card__like-button::before {
+.card__like-button::before,
+.button::before {
     content: "";
     position: absolute;
     display: block;
@@ -190,7 +227,8 @@
     transform: scaleX(0);
 }
 
-.card__like-button:hover::before {
+.card__like-button:hover::before,
+.button:hover::before {
     transform: scaleX(1);
 }
 
@@ -204,4 +242,119 @@
 
 .card__like-button:hover {
     cursor: pointer;
+}
+
+.save-button {
+    inline-size: 336px;
+    block-size: 55px;
+    display: flex;
+    gap: 8px;
+    color: var(--mix-color);
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.main__content .save-button {
+    margin-block-end: 100px;
+}
+
+.floppy {
+    width: 21px;
+    height: 21px;
+    mix-blend-mode: difference;
+}
+
+.dialog {
+    background-color: var(--background-color);
+    border: 2px solid var(--border-color);
+    padding: 30px;
+    color: var(--color);
+    font-family: var(--font-accent), sans-serif;
+    font-size: 14px;
+}
+
+.dialog .save-button {
+    inline-size: 293px;
+    block-size: 38px;
+}
+
+.dialog .floppy {
+    width: 39px;
+    height: 39px;
+    mix-blend-mode: normal;
+}
+
+.dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.dialog:not([open]) {
+    pointer-events: none;
+    opacity: 0;
+}
+
+.dialog-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    inline-size: 295px;
+}
+
+.dialog-text-content {
+    display: flex;
+    gap: 20px;
+    place-items: center;
+}
+
+.dialog-text {
+    max-inline-size: 234px;
+    text-transform: uppercase;
+    line-height: 150%;
+}
+
+.dialog .button__text {
+    text-transform: uppercase;
+}
+
+.card__like-button:focus-visible,
+.save-button:focus-visible {
+    box-shadow: 2px 2px 0px 0px var(--color);
+    transition: 0.3s ease;
+}
+
+@media (width <= 375px) {
+    .card-description {
+        max-inline-size: 317px;
+    }
+
+    .image-label {
+        right: 10px;
+    }
+
+    .save-button {
+        inline-size: 308px;
+        block-size: 84px;
+        flex-direction: column;
+        place-items: center;
+    }
+    .floppy {
+        width: 28px;
+        height: 28px;
+    }
+
+    .dialog .save-button {
+        inline-size: 257px;
+        block-size: 38px;
+    }
+    .dialog-text {
+        max-inline-size: 198px;
+    }
+
+    .dialog-content {
+        inline-size: 257px;
+    }
+
+    .dialog {
+        padding: 30px 42px;
+    }
 }
